@@ -13,13 +13,13 @@ var auth = {
     required: jwt({
         secret: secret,
         userProperty: 'payload',
-        getTokenFromHeader: getTokenFromHeader
+        getToken: getTokenFromHeader
     }),
     optional: jwt({
         secret: secret,
         userProperty: 'payload',
         credentialsRequired: false,
-        getTokenFromHeader: getTokenFromHeader
+        getToken: getTokenFromHeader
 
     })
 };
