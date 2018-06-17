@@ -3,6 +3,7 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 var Article = mongoose.model('Article');
 var User = mongoose.model('User');
+var Comment = mongoose.model('Comment');
 var auth = require('../auth');
 
 router.post('/', auth.required, function(req, res, next) {
