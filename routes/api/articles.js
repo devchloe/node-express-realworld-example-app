@@ -68,4 +68,17 @@ router.put('/:article', auth.required, function(req, res, next) {
     });
 });
 
+
+router.delete('/:article', auth.required, function(req, res, next) {
+    User.findById(req.payload.id).then(function(user) {
+        if(req.article._id.toString() === req.payload.id.toString()) {
+            return req.article.remove().then(function() {
+                return res.sendStatus(204);
+            });
+        } else {
+            return res.sendStatus(403);
+        }
+    });
+});
+
 module.exports = router;
