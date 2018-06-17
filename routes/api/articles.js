@@ -81,4 +81,19 @@ router.delete('/:article', auth.required, function(req, res, next) {
     });
 });
 
+router.post('/:article/favorite', auth.required, function(req, res, next) {
+    var articleId = this.article._id;
+
+    User.findById(req.payload.id).then(function(user) {
+        if (!user) { return res.sendStatus(401); }
+
+        return user.favorite(articleId).then(function() {
+            return req.article.updateFavoriteCount().then(function(article) {
+                return res.json({article: article.toJSONFor(user)});
+            });
+        });
+    }).catch(next);
+
+});
+
 module.exports = router;
