@@ -53,7 +53,7 @@ UserSchema.methods.toProfileJSONFor = function(user){
         bio: this.bio,
         image: this.image || 'https://static.productionready.io/images/smiley-cyrus.jpg',
         following: false
-    }.
+    }
 };
 
 mongoose.model('User', UserSchema);
