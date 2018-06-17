@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 var slug = require('slug'); // auto create URL slugs
+var User = mongoose.model('User');
 
 var ArticleSchema = new mongoose.Schema({
     slug: {type: String, lowercase: true, unique: true},
