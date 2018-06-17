@@ -82,7 +82,7 @@ router.delete('/:article', auth.required, function(req, res, next) {
 });
 
 router.post('/:article/favorite', auth.required, function(req, res, next) {
-    var articleId = this.article._id;
+    var articleId = req.article._id;
 
     User.findById(req.payload.id).then(function(user) {
         if (!user) { return res.sendStatus(401); }
@@ -94,6 +94,20 @@ router.post('/:article/favorite', auth.required, function(req, res, next) {
         });
     }).catch(next);
 
+});
+
+router.delete('/:article/favorite', auth.required, function(req, res, next) {
+    var articleId = req.article._id;
+
+    User.findById(req.payload.id).then(function(user) {
+        if (!user) { return res.sendStatus(401); }
+
+        return user.unfavorite(articleId).then(function() {
+            return req.article.updateFavoriteCount().then(function(article) {
+                return res.json({article: article.toJSONFor(user)});
+            });
+        });
+    });
 });
 
 module.exports = router;
