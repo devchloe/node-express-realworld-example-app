@@ -57,4 +57,12 @@ UserSchema.methods.toProfileJSONFor = function(user){
     }
 };
 
+UserSchema.methods.favorite = function(id){
+    if(this.favorites.indexOf(id) === -1) {
+        this.favorites.push(id);
+    }
+
+    return this.save();
+};
+
 mongoose.model('User', UserSchema);
