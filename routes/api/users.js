@@ -4,7 +4,7 @@ var passport = require('passport');
 var User = mongoose.model('User');
 var auth = require('../auth');
 
-router.post('/users', function(req, express, next) {
+router.post('/users', function(req, res, next) {
     var user = new User();
 
     user.username = req.body.user.username;
@@ -12,7 +12,7 @@ router.post('/users', function(req, express, next) {
     user.setPassword(req.body.user.password);
 
     user.save().then(function() {
-        return express.json({user: user.toAuthJSON()});
+        return res.json({user: user.toAuthJSON()});
     }).catch(next);
 });
 
