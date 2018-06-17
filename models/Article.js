@@ -45,7 +45,7 @@ ArticleSchema.methods.toJSONFor = function(user){
 ArticleSchema.methods.updateFavoriteCount = function() {
     var article = this;
 
-    return User.count({favorites: {$plugin: [article._id]}}).then(function(count) {
+    return User.count({favorites: {$in: [article._id]}}).then(function(count) {
         article.favoritesCount = count;
 
         return article.save();

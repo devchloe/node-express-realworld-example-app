@@ -11,7 +11,7 @@ var UserSchema = new mongoose.Schema({
     image: String,
     hash: String,
     salt: String,
-    favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
+    favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}],
 }, {timestamps: true});
 
 UserSchema.plugin(uniqueValidator, {messages: 'is already taken.'});
@@ -71,8 +71,8 @@ UserSchema.methods.unfavorite = function(id) {
 
 UserSchema.methods.isFavorite = function(id) {
     this.favorites.some(function(favoriteId) {
-        return favorites.toString() === id.toString();
-    })
+        return favoriteId.toString() === id.toString();
+    });
 };
 
 mongoose.model('User', UserSchema);
