@@ -10,7 +10,8 @@ var UserSchema = new mongoose.Schema({
     bio: String,
     image: String,
     hash: String,
-    salt: String
+    salt: String,
+    favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
 }, {timestamps: true});
 
 UserSchema.plugin(uniqueValidator, {messages: 'is already taken.'});
